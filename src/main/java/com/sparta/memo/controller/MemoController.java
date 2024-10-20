@@ -25,7 +25,7 @@ public class MemoController {
 
     @GetMapping("/memos")
     public List<MemoResponseDto> getMemos() {
-        return memoService.getMemo();
+        return memoService.getMemos();
     }
 
     @PutMapping("/memos/{id}")
