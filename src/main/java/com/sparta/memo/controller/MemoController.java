@@ -12,31 +12,31 @@ import java.util.List;
 @RequestMapping("/api")
 public class MemoController {
 
-    private final JdbcTemplate jdbcTemplate;
+    private final MemoService memoService;
 
     public MemoController(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+        this.memoService = new MemoService(jdbcTemplate);
     }
 
     @PostMapping("/memos")
     public MemoResponseDto createMemo(@RequestBody MemoRequestDto requestDto) {
-        return new MemoService(jdbcTemplate).creatMemo(requestDto);
+        return memoService.creatMemo(requestDto);
     }
 
     @GetMapping("/memos")
     public List<MemoResponseDto> getMemos() {
-        return new MemoService(jdbcTemplate).getMemo();
+        return memoService.getMemo();
     }
 
     @PutMapping("/memos/{id}")
     public Long updateMemo(@PathVariable Long id, @RequestBody MemoRequestDto requestDto) {
-        return new MemoService(jdbcTemplate).updateMemo(id, requestDto);
+        return memoService.updateMemo(id, requestDto);
 
     }
 
     @DeleteMapping("/memos/{id}")
     public Long deleteMemo(@PathVariable Long id) {
-        return new MemoService(jdbcTemplate).deleteMemo(id);
+        return memoService.deleteMemo(id);
     }
 
 
